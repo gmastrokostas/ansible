@@ -1,4 +1,8 @@
 ---
+- name: Enable PowerTools Repo
+  #DNF Will not make it permanent
+  shell: dnf config-manager --set-enabled PowerTools
+
 - name: Installing Epel-Realese Package
   package:
     name: "epel-release"
