@@ -1,0 +1,3 @@
+---
+packages: ['telnet','nc','mutt','xinetd','nfs-utils','screen','bc','net-tools','bind-utils','vim','chrony','oddjob','oddjob-mkhomedir','wget','lsof','man','sysstat','zip','unzip','rsync','facter','autofs','nrpe','tcpdump','tuned','tuned-utils']
+

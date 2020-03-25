@@ -1,0 +1,35 @@
+---
+- name: Installing Epel-Realese Package
+  package:
+    name: "epel-release"
+    state: latest
+
+- name: Update all packages in operating system
+  async: 1
+  poll: 0
+  yum:
+    name: "*"
+    state: latest
+
+- name: Rebooting servers
+  include_role: 
+    name: reboot_servers
+
+- name: Installing base packages
+  package:
+    name: "{{ packages }}"
+    state: latest
+
+- name: Enable and Start  tuned service
+  systemd:
+    name: tuned
+    enabled: yes
+    state: started
+
+- name: Set Performance profile
+  shell: tuned-adm profile "{{ tuned_profile }}"
+
+- name: Restart tuned-adm to enable perfomance profile
+  systemd:
+    name: tuned
+    state: restarted

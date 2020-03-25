@@ -1,0 +1,7 @@
+---
+- name: Rebooting Servers
+  reboot:
+    msg: "Rebooting Servers"
+    post_reboot_delay: 12
+    test_command: 'yum repolist'
+
