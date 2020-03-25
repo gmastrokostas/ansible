@@ -40,3 +40,7 @@
 
 - name: Update man pages
   shell: mandb
+
+- name: Rebooting Servers post Initial Setup
+  include_role:
+    name: reboot_servers
