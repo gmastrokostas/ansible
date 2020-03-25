@@ -37,3 +37,6 @@
   systemd:
     name: tuned
     state: restarted
+
+- name: Update man pages
+  shell: mandb
