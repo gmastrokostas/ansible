@@ -47,7 +47,7 @@
     state: present
     gid: 9000
 
-- include_vars: users.yml
+- include_vars: main.yml
 - name: Create local admin accounts
   user:
     name: "{{ item.username }}"

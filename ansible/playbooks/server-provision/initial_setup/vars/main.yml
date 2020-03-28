@@ -1,0 +1,19 @@
+users:
+  - username: koukla
+  - username: cookie
+
+packages:
+  - net-tools
+  - bind-utils
+  - open-vm-tools
+  - vim
+  - oddjob
+  - oddjob-mkhomedir
+  - wget
+  - screen
+  - bc
+  - sysstat
+  - zip
+  - unzip
+  - rsync
+  - screen
