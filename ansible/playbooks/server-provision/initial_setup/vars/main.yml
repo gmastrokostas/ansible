@@ -17,3 +17,16 @@ packages:
   - unzip
   - rsync
   - screen
+  - mutt
+  - nc
+  - telnet
+  - xinetd
+  - nfs-utils
+  - autofs
+  - chrony
+  - lsof
+  - facter
+  - nrpe
+  - tcpdump
+  - tuned
+  - tuned-utils
