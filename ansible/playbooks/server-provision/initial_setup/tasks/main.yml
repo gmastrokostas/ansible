@@ -41,6 +41,23 @@
 - name: Update man pages
   shell: mandb
 
+- name: Create local admin group
+  group:
+    name: admingroup
+    state: present
+    gid: 9000
+
+- include_vars: users.yml
+- name: Create local admin accounts
+  user:
+    name: "{{ item.username }}"
+    shell: /bin/bash
+    groups: admingroup
+    append: yes
+  with_items: "{{ users }}"
+
+
 - name: Rebooting Servers post Initial Setup
   include_role:
     name: reboot_servers
+
