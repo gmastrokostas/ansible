@@ -23,14 +23,14 @@
       group: ansible
       mode: 770
 
-   - name: Add comment
+   - name: Add comment at top of file
      lineinfile:
       state: present
       path: /home/ansible/program1.sh
       insertbefore: '^hostname='
       line: Start of block
       
-   - name: Add last comments
+   - name: Add comment at bottom of file
      lineinfile:
       state: present
       path: /home/ansible/program1.sh
