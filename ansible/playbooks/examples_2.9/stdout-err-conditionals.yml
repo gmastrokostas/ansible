@@ -1,0 +1,42 @@
+---
+- hosts: all
+  tasks:
+   - name: Print output
+     command: echo "hello there"
+     register: hello
+   - debug:
+      msg: "stdout={{hello.stdout}}"
+#Detect if there is an output and take actions
+   - debug:
+      msg: "stderr={{hello.stderr}}"
+   - debug:
+      msg: "No errors"
+     when: hello.stderr == ""
+#Search for string and add value to a paremeter using ansible facts
+   - name: Find text in script
+     lineinfile:
+      state: present
+      path: /home/ansible/program1.sh
+      regexp: '^hostname='
+      line: hostname={{ansible_hostname}}
+      owner: ansible
+      group: ansible
+      mode: 770
+
+   - name: Add comment
+     lineinfile:
+      state: present
+      path: /home/ansible/program1.sh
+      insertbefore: '^hostname='
+      line: Start of block
+      
+   - name: Add last comments
+     lineinfile:
+      state: present
+      path: /home/ansible/program1.sh
+      insertafter: EOF
+      line: End
+
+
+
+
