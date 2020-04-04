@@ -1,0 +1,34 @@
+- hosts: [all]
+  gather_facts: yes
+  #connection: local
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  vars:
+    date: "{{lookup('pipe', 'date +%m%d%Y') }}"
+
+  tasks:
+    - name: Set flog for Centos 8 machines
+      set_fact:
+        flog: /etc/redhat-release
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "8")
+
+    - name: Set flog for Centos 7 machines
+      set_fact:
+        flog: /etc/redhat-release
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+
+
+    - name: Capture the DNF log files from each server
+      fetch:
+        src: "{{flog}}"
+        dest: report-{{date}}/
+
+    - name: Compress captured data
+      archive:
+        path: report-{{date}}
+        dest: report-{{date}}.zip
+        format: zip
+      delegate_to: 127.0.0.1
+
