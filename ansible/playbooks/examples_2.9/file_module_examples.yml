@@ -16,5 +16,13 @@
         owner: ansible
         group: ansible
         state: link
+    
+    - name: Create Directory and recurse change permissions 
+      file:
+        path: /var/tmp/stuff
+        state: directory
+        recurse: yes
+        owner: ansible
+        group: ansible
 
 
