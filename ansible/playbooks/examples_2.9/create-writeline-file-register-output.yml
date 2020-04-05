@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: create file
+      file:
+        path: /home/ansible/testfile
+        state: touch
+      register: file_creation
+    - debug: msg="{{file_creation}}"  
+
+    - name: Edit our new file
+      lineinfile:
+        path: /home/ansible/testfile
+        line: "george{{file_creation.uid}}"
