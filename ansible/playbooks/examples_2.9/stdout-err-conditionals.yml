@@ -1,5 +1,11 @@
 ---
 - hosts: all
+  gather_facts: no
+
+  vars:
+    text: george
+    text2: jim
+
   tasks:
    - name: Print output
      command: echo "hello there"
@@ -12,6 +18,21 @@
    - debug:
       msg: "No errors"
      when: hello.stderr == ""
+#Search for text and set conditional according to search result
+  tasks:
+    - name: Print variable
+      debug:
+        var: text
+      #when: text.find("hello") != -1
+      when: "{{text2 in text}}"
+
+    - name: Print outpute from ls command
+      shell: ls -l /home
+      register: output
+    - debug:
+        msg: "{{output.stdout_lines}}"
+
+
 #Search for string and add value to a paremeter using ansible facts
    - name: Find text in script
      lineinfile:
