@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: no
+
+  vars:
+    text: george
+    text2: jim
+
+
+  tasks:
+    - name: Print variable
+      debug:
+        var: text
+      #when: text.find("hello") != -1
+      when: "{{text2 in text}}"
+
+    - name: Print outpute from ls command
+      shell: ls -l /home
+      register: output
+    - debug:
+        msg: "{{output.stdout_lines}}"

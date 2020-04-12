@@ -1,0 +1,20 @@
+[redhat8]
+rh1  ansible_host=192.168.1.22
+rh2  ansible_host=192.168.1.24
+
+[centos8]
+centos1  ansible_host=192.168.1.30
+centos2  ansible_host=192.168.1.31
+
+[centos7]
+centos7a ansible_host=192.168.1.32
+
+[centos6]
+centos6a ansible_host=192.168.1.33
+
+[hypervisors]
+hypervisor1  ansible_host=192.168.1.10
+
+[infra]
+bind1  ansible_host=192.168.1.25
+
