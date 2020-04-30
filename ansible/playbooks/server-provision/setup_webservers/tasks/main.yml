@@ -1,0 +1,9 @@
+---
+- name: Install Apache on Respective servers
+  package:
+    name: httpd
+    state: latest
+    enabled: yes
+  when: 
+
+

@@ -1,4 +1,4 @@
-- hosts: [centos]
+- hosts: [all]
   any_errors_fatal: false
   become_user: root
   become_method: sudo
@@ -9,6 +9,7 @@
   roles:
     - facts
     - initial_setup
+    #- setup_webservers
     #- reboot_servers
     #- base_install
     #- reboot_servers

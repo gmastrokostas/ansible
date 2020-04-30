@@ -2,7 +2,7 @@ users:
   - username: koukla
   - username: cookie
 
-packages:
+packages_RedHat:
   - net-tools
   - bind-utils
   - open-vm-tools
@@ -30,3 +30,29 @@ packages:
   - tcpdump
   - tuned
   - tuned-utils
+
+packages_Ubuntu:
+  - net-tools
+  - open-vm-tools
+  - vim
+  - oddjob
+  - oddjob-mkhomedir
+  - wget
+  - screen
+  - bc
+  - sysstat
+  - zip
+  - unzip
+  - rsync
+  - screen
+  - mutt
+  - telnet
+  - xinetd
+  - lsof
+  - facter
+  - tcpdump
+  - tuned
+  - tuned-utils
+  - nfs-kernel-server
+  - nfs-common
+  - nagios-plugins

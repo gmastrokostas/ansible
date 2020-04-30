@@ -4,9 +4,9 @@
     tuned_profile: virtual-guest
   when: (ansible_virtualization_role == "guest")
 
-#- name: Setting Performance Profile for HyperVisors
-#  set_fact:
-#    tuned_profile: virtual-host
-#  when: (ansible_virtualization_role == "host")
+- name: Setting Performance Profile for HyperVisors
+  set_fact:
+    tuned_profile: virtual-host
+  when: (ansible_virtualization_role == "host")
 
 

@@ -2,11 +2,13 @@
 - name: Enable PowerTools Repo
   #DNF Will not make it permanent
   shell: dnf config-manager --set-enabled PowerTools
+  when:  (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
 
 - name: Installing Epel-Realese Package
   package:
     name: "epel-release"
     state: latest
+  when:  (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
 
 - name: Update all packages in operating system
   async: 1
@@ -19,10 +21,17 @@
   include_role: 
     name: reboot_servers
 
-- name: Installing base packages
+- name: Installing base packages for Red Hat
   package:
-    name: "{{ packages }}"
+    name: "{{ packages_RedHat }}"
     state: latest
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+ 
+- name: Install base packages for Ubuntu Server
+  package:
+    name: "{{packages_Ubuntu}}"
+    state: latest
+  when: (ansible_distribution == "Ubuntu")
 
 - name: Enable and Start  tuned service
   systemd:
@@ -47,7 +56,7 @@
     state: present
     gid: 9000
 
-- include_vars: main.yml
+#- include_vars: main.yml
 - name: Create local admin accounts
   user:
     name: "{{ item.username }}"
