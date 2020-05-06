@@ -56,3 +56,28 @@ packages_Ubuntu:
   - nfs-kernel-server
   - nfs-common
   - nagios-plugins
+
+packages_virt_rh:
+  - qemu-kvm 
+  - libvirt
+  - libvirt-python 
+  - libguestfs-tools
+  - virt-install
+
+packages_virt_ub:
+# - qemu-kvm 
+# - libvirt-bin 
+# - virtinst 
+# - bridge-utils 
+# - cpu-checker
+  - qemu-kvm 
+  - libvirt-daemon 
+  - bridge-utils 
+  - virtinst 
+  - libvirt-daemon-system 
+  - virt-top 
+  - libguestfs-tools 
+  - libosinfo-bin  
+  - qemu-system 
+  - virt-manager
+

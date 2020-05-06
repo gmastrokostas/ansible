@@ -21,17 +21,33 @@
   include_role: 
     name: reboot_servers
 
-- name: Installing base packages for Red Hat
+- name: Installing base packages for Red Hat devices
   package:
     name: "{{ packages_RedHat }}"
     state: latest
   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
  
-- name: Install base packages for Ubuntu Server
+- name: Install base packages for Ubuntu devices
   package:
     name: "{{packages_Ubuntu}}"
     state: latest
   when: (ansible_distribution == "Ubuntu")
+
+- name: Install VIRT packages for RH Hypervisors
+  package:
+    name: "{{ packages_virt_rh }}"
+  when: 
+    - "'hyper' in inventory_hostname" 
+    - (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+
+- name: Install VIRT packages for Ubuntu Hypervisors
+  package:
+    name: "{{ packages_virt_ub }}"
+  when: 
+    - "'hyper' in inventory_hostname" 
+    - (ansible_distribution == "Ubuntu")
+  #tags:
+  #  - virt_ub
 
 - name: Enable and Start  tuned service
   systemd:
