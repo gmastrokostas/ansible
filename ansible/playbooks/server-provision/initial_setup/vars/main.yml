@@ -1,7 +1,3 @@
-users:
-  - username: koukla
-  - username: cookie
-
 packages_RedHat:
   - net-tools
   - bind-utils
@@ -65,11 +61,7 @@ packages_virt_rh:
   - virt-install
 
 packages_virt_ub:
-# - qemu-kvm 
-# - libvirt-bin 
-# - virtinst 
-# - bridge-utils 
-# - cpu-checker
+  - cpu-checker
   - qemu-kvm 
   - libvirt-daemon 
   - bridge-utils 

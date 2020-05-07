@@ -13,7 +13,7 @@
 [centos]
 centos1
 centos2
-centos3
+#centos3
 
 [hypervisors]
 #hypervisor1

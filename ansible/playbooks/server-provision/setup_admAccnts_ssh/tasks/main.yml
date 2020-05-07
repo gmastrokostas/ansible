@@ -1,0 +1,24 @@
+---
+- name: Create Local Admin Group
+  group:
+    name: admingroup
+    state: present
+    gid: 9000
+
+- name: Create Local Admin Users
+  user:
+    name: "{{ item.username }}"
+    #generate_ssh_key: yes
+    #force: yes
+    shell: /bin/bash
+    groups: admingroup
+    append: yes
+  with_items: "{{ users }}"
+
+- name: Push public keys between Admin accounts
+  authorized_key:
+    #user: "{{item.username}}"
+    user: koukla
+    state: present
+    key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
+    

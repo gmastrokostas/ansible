@@ -7,8 +7,9 @@
 
 
   roles:
-    - facts
-    - initial_setup
+    #- facts
+    #- initial_setup
+    - setup_admAccnts_ssh
     #- setup_webservers
     #- reboot_servers
     #- base_install

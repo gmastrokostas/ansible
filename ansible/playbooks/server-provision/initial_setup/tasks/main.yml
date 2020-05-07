@@ -46,8 +46,6 @@
   when: 
     - "'hyper' in inventory_hostname" 
     - (ansible_distribution == "Ubuntu")
-  #tags:
-  #  - virt_ub
 
 - name: Enable and Start  tuned service
   systemd:
@@ -65,22 +63,6 @@
 
 - name: Update man pages
   shell: mandb
-
-- name: Create local admin group
-  group:
-    name: admingroup
-    state: present
-    gid: 9000
-
-#- include_vars: main.yml
-- name: Create local admin accounts
-  user:
-    name: "{{ item.username }}"
-    shell: /bin/bash
-    groups: admingroup
-    append: yes
-  with_items: "{{ users }}"
-
 
 - name: Rebooting Servers post Initial Setup
   include_role:
