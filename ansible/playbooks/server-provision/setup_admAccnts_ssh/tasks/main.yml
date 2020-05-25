@@ -4,6 +4,7 @@
     name: admingroup
     state: present
     gid: 9000
+  tags: local_admin_group
 
 - name: Create Local Admin Users
   user:
@@ -14,11 +15,14 @@
     groups: admingroup
     append: yes
   with_items: "{{ users }}"
+  tags: local_admin_acct
 
 - name: Push public keys between Admin accounts
   authorized_key:
-    #user: "{{item.username}}"
-    user: koukla
+    user: "{{item.username}}"
+    #user: ansible
     state: present
     key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
+  with_items: "{{users}}"
+  tags: push_ssh_key
     

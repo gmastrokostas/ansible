@@ -1,0 +1,7 @@
+create pair keys for account XYZ.
+
+dump public content into auth_key file.
+
+push private key and auth_key file to account XYZ on servers A, B, C
+
+This allows for a mesh connection between all servers for account XYZ.

@@ -1,0 +1,30 @@
+---
+#Bug prevents this from working -- Failed to import the required Python library (NetworkManager glib API) on centos1's Python
+#- name: Check if resolv.conf points to our AD
+#  nmcli:
+#    conn_name: enp1s0
+#    dns4_search: AD1
+#    state: present
+
+- name: Check if we can connect DNS port
+  wait_for:
+    host: AD1.sfentona.lol
+    port: 53
+    state: started
+    delay: 0
+    timeout: 1
+  register: telnet_result
+
+- name: Fail playbook if telnet test failed
+  assert:
+    that:
+      - "'Timeout' not in telnet_result"
+      - "'Refused' not in telnet_result"
+
+- name: Setting up the SSSD config file on the remote servers
+  template:
+    src: sssd_configuratio_for_AD1.conf
+    dest: /etc/sssd/sssd.conf
+    owner: root
+    group: root
+    mode: 0600

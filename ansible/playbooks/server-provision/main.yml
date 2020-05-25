@@ -7,9 +7,11 @@
 
 
   roles:
-    #- facts
+    - set_facts
     #- initial_setup
-    - setup_admAccnts_ssh
+    #- setup_admAccnts_ssh
+    - ad_integration
+    #- harden_servers
     #- setup_webservers
     #- reboot_servers
     #- base_install

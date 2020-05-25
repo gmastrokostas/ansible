@@ -3,12 +3,14 @@
   #DNF Will not make it permanent
   shell: dnf config-manager --set-enabled PowerTools
   when:  (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+  tags: enable_powerRepo
 
 - name: Installing Epel-Realese Package
   package:
     name: "epel-release"
     state: latest
   when:  (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+  tags: intall_epel
 
 - name: Update all packages in operating system
   async: 1
@@ -16,22 +18,26 @@
   yum:
     name: "*"
     state: latest
+  tags: yum_update_all
 
 - name: Rebooting servers
   include_role: 
     name: reboot_servers
+  tags: reboot_post_update
 
 - name: Installing base packages for Red Hat devices
   package:
     name: "{{ packages_RedHat }}"
     state: latest
   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+  tags: install_base_packages_rh
  
 - name: Install base packages for Ubuntu devices
   package:
     name: "{{packages_Ubuntu}}"
     state: latest
   when: (ansible_distribution == "Ubuntu")
+  tags: install_base_packages_ubu
 
 - name: Install VIRT packages for RH Hypervisors
   package:
@@ -39,6 +45,7 @@
   when: 
     - "'hyper' in inventory_hostname" 
     - (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+  tags: install_virt_rh
 
 - name: Install VIRT packages for Ubuntu Hypervisors
   package:
@@ -46,25 +53,31 @@
   when: 
     - "'hyper' in inventory_hostname" 
     - (ansible_distribution == "Ubuntu")
+  tags: install_virt_ub
 
 - name: Enable and Start  tuned service
   systemd:
     name: tuned
     enabled: yes
     state: started
+  tags: enable_tuned
 
 - name: Set Performance profile
   shell: tuned-adm profile "{{ tuned_profile }}"
+  tags: tuned_profile
 
 - name: Restart tuned-adm to enable perfomance profile
   systemd:
     name: tuned
     state: restarted
+  tags: restart_tuned_adm
 
 - name: Update man pages
   shell: mandb
+  tags: update_mandb
 
 - name: Rebooting Servers post Initial Setup
   include_role:
     name: reboot_servers
+  tags: final_reboot
 

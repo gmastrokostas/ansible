@@ -9,4 +9,3 @@
     tuned_profile: virtual-host
   when: (ansible_virtualization_role == "host")
 
-

@@ -26,6 +26,19 @@ packages_RedHat:
   - tcpdump
   - tuned
   - tuned-utils
+  - realmd
+  - sssd 
+  - oddjob
+  - oddjob-mkhomedir 
+  - adcli 
+  - samba-common 
+  - samba-common-tools 
+  - krb5-workstation 
+  - authselect-compat
+  - NetworkManager-libnm
+  - nm-connection-editor
+  - python3-libsemanage
+  - python3-policycoreutils
 
 packages_Ubuntu:
   - net-tools
@@ -52,6 +65,16 @@ packages_Ubuntu:
   - nfs-kernel-server
   - nfs-common
   - nagios-plugins
+  - realmd 
+  - libnss-sss 
+  - libpam-sss 
+  - sssd 
+  - sssd-tools 
+  - adcli 
+  - samba-common-bin 
+  - oddjob 
+  - oddjob-mkhomedir 
+  - packagekit
 
 packages_virt_rh:
   - qemu-kvm 

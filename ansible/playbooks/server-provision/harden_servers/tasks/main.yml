@@ -1,0 +1,28 @@
+- name: Restrict root SSH logins
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: PermitRootLogin yes
+    line: PermitRootLogin no
+    owner: root
+    group: root
+    mode: '0600'
+  when: "'hyper' not in inventory_hostname"
+  tags: no_ssh_root
+
+- name: Restrict access only to the MGT Network
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '#ListenAddress 0.0.0.0'
+    line: ListenAddress {{ansible_enp1s0.ipv4.address}}
+    owner: root
+    group: root
+    mode: '0600'
+  tags: ssh_listen_address
+
+
+- name: Reload SSH service
+  service:
+    name: sshd
+    state: reloaded
+  tags: reload_ssh
+
