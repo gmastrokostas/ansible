@@ -31,4 +31,8 @@
   notify: restart SSSD service  
 
 - name: Inserting Server into {{AD_Domain}}
-  shell: realm join {{AD_Domain}} -U Administrator
+  #shell: realm join {{AD_Domain}} -U Administrator
+  expect:
+    command: /bin/bash -c "/usr/bin/realm realm discover ADS.DOMAIN.TLD && realm join ADS.DOMAIN.TLD --computer-ou=OU=LINUX,DC=domain,DC=tld --user=admin_user"
+    responses:
+      Password for admin_user: "password123"

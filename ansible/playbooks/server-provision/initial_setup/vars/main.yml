@@ -1,5 +1,6 @@
 packages_RedHat:
   - net-tools
+  - expect
   - bind-utils
   - open-vm-tools
   - vim
@@ -42,6 +43,7 @@ packages_RedHat:
 
 packages_Ubuntu:
   - net-tools
+  - expect
   - open-vm-tools
   - vim
   - oddjob
