@@ -1,19 +1,5 @@
-#[web]
-#node1
-#node2
-
-#[db]
-#node3
-
-#[redhat]
-#node1
-#node2
-#node3
-
 [centos]
-centos1
-#centos2
-#centos3
+hv1-centos7
 
 [hypervisors]
 #hypervisor1

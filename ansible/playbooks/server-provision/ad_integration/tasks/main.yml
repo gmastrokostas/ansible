@@ -1,11 +1,4 @@
 ---
-#Bug prevents this from working -- Failed to import the required Python library (NetworkManager glib API) on centos1's Python
-#- name: Check if resolv.conf points to our AD
-#  nmcli:
-#    conn_name: enp1s0
-#    dns4_search: AD1
-#    state: present
-
 - name: Check if we can connect DNS port
   wait_for:
     host: AD1.sfentona.lol
@@ -21,6 +14,27 @@
       - "'Timeout' not in telnet_result"
       - "'Refused' not in telnet_result"
 
+- name: Install pip
+  package:
+    name: python-pip
+    state: present
+
+- name: Install pexpect
+  pip: name=pexpect state=present
+
+- name: Inserting Server into Domain
+  expect:
+    command: realm join "{{AD_Domain}}" -U Administrator
+    responses:
+        (?i)Password for *: "{{AD_Passwd}}"
+  ignore_errors: yes
+
+- name: Copy SUDO files for System Administrators
+  template:
+    src:  sudo_rules_sysadm
+    dest: /etc/sudoers.d/sudo_rules_sysadm
+
+
 - name: Setting up the SSSD config file on the remote servers
   template:
     src: sssd_configuratio_for_AD1.conf
@@ -28,11 +42,7 @@
     owner: root
     group: root
     mode: 0600
-  notify: restart SSSD service  
+  notify: restart SSSD service 
 
-- name: Inserting Server into {{AD_Domain}}
-  #shell: realm join {{AD_Domain}} -U Administrator
-  expect:
-    command: /bin/bash -c "/usr/bin/realm realm discover ADS.DOMAIN.TLD && realm join ADS.DOMAIN.TLD --computer-ou=OU=LINUX,DC=domain,DC=tld --user=admin_user"
-    responses:
-      Password for admin_user: "password123"
+
+
