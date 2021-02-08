@@ -1,6 +1,0 @@
----
-- name: start_httpd
-  service:
-    name: httpd
-    state: started
-  

@@ -1,6 +1,0 @@
----
-- name: enable httpd
-  service:
-   name: httpd
-   enabled: yes
-  listen: start_httpd

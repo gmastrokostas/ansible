@@ -1,7 +1,0 @@
----
-- name: Install httpd package
-  package:
-    name: httpd
-    state: latest
-  notify: start_httpd 
-
